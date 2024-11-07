@@ -7,7 +7,11 @@ const email = document.getElementById("email");
 const country = document.getElementById("country");
 const countryRegex = /^[A-Za-z\s]+$/;
 const postcode = document.getElementById("postcode");
-const postcodeRegex = /^[A-Z]{1,2}\d[A-Z\d]? \d[A-Z]{2}$/i
+const postcodeRegex = /^[A-Z]{1,2}\d[A-Z\d]? \d[A-Z]{2}$/i;
+const password = document.getElementById("password");
+const passwordConfirmation = document.getElementById("passwordConfirmation");
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 let error;
 let targetID;
 
@@ -42,6 +46,28 @@ form.addEventListener("input", (event) => {
         // If there is still an error, show the correct error
         showError(event, error);
       }
+    case password:
+      console.log(password.value)
+      console.log(passwordRegex.test(password.value))
+      if (passwordRegex.test(password.value)) {
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      } else {
+        // If there is still an error, show the correct error
+        showError(event, error);
+      }
+    case passwordConfirmation:
+      if (password.value !== passwordConfirmation.value){
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      }
+      else if (passwordRegex.test(passwordConfirmation.value)) {
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      } else {
+        // If there is still an error, show the correct error
+        showError(event, error);
+      }
   }
 });
 
@@ -66,9 +92,8 @@ function showError(event, error) {
         error.textContent = `Email should be at least ${email.minLength} characters; you entered ${email.value.length}.`;
         error.className = "error active";
       }
-      else
       // Add the `active` class
-      error.className = "error";
+      else error.className = "error";
       break;
 
     case "country":
@@ -83,7 +108,26 @@ function showError(event, error) {
       if (postcode.value.length !== 0 && !postcodeRegex.test(postcode.value)) {
         error.textContent = "Invalid postcode";
       } else if (postcode.value.length === 0) {
-        error.textContent = "Please enter a country name";
+        error.textContent = "Please enter a postocde";
+      } else error.textContent = "";
+      break;
+
+    case "password":
+      if (password.value.length !== 0 && !passwordRegex.test(password.value)) {
+        error.textContent = "Password must have 1 upper, 1 lowercase, 1 digit, and special char and min 8 chars";
+      } else if (password.value.length === 0) {
+        error.textContent = "Please enter your password";
+      } else error.textContent = "";
+      break;
+
+    case "passwordConfirmation":
+
+      if (passwordConfirmation.value !== password.value){
+      error.textContent = "passwords must match";
+      }  else if (passwordConfirmation.value.length !== 0 && !passwordRegex.test(passwordConfirmation.value)) {
+        error.textContent = "Password must have 1 upper, 1 lowercase, 1 digit, and special char and min 8 chars";
+      } else if (passwordConfirmation.value.length === 0) {
+        error.textContent = "Please enter your password";
       } else error.textContent = "";
       break;
   }

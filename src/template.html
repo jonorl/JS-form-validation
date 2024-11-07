@@ -18,13 +18,14 @@
         <input type="text" id="postcode" name="postcode" />
         <span class="error" aria-live="polite"></span>
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" />
+        <input type="password" id="password" name="password" required minlength="8"/>
         <span class="error" aria-live="polite"></span>
         <label for="passwordConfirmation">Password Confirmation</label>
         <input
           type="password"
           id="passwordConfirmation"
           name="passwordConfirmation"
+          required minlength="8"
         />
         <span class="error" aria-live="polite"></span>
         <button>Submit</button>
