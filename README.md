@@ -1,2 +1,2 @@
 # to do list
-Dropdown menu project for Project Odin
+JS form validation practice for The Project Odin

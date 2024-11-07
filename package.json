@@ -1,7 +1,7 @@
 {
-  "name": "dropdownmenu",
+  "name": "jsvalidationform",
   "version": "1.0.0",
-  "description": "dropdown menu for Project Odin",
+  "description": "JS validation form practice for The Project Odin",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,7 +22,7 @@
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.2",
     "style-loader": "^4.0.0",
-    "webpack": "^5.95.0",
+    "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"
   },
@@ -290,5 +290,9 @@
     "which": "^2.0.2",
     "wildcard": "^2.0.1",
     "ws": "^8.18.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "JS-form-validation"
   }
 }
