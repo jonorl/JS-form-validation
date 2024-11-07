@@ -6,6 +6,8 @@ const form = document.querySelector("form");
 const email = document.getElementById("email");
 const country = document.getElementById("country");
 const countryRegex = /^[A-Za-z\s]+$/;
+const postcode = document.getElementById("postcode");
+const postcodeRegex = /^[A-Z]{1,2}\d[A-Z\d]? \d[A-Z]{2}$/i
 let error;
 let targetID;
 
@@ -32,6 +34,14 @@ form.addEventListener("input", (event) => {
         // If there is still an error, show the correct error
         showError(event, error);
       }
+    case postcode:
+      if (postcodeRegex.test(postcode.value)) {
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      } else {
+        // If there is still an error, show the correct error
+        showError(event, error);
+      }
   }
 });
 
@@ -46,22 +56,33 @@ function showError(event, error) {
       if (target.validity.valueMissing) {
         // If empty
         error.textContent = "You need to enter an email address.";
+        error.className = "error active";
       } else if (email.validity.typeMismatch) {
         // If it's not an email address,
         error.textContent = "Entered value needs to be an email address.";
+        error.className = "error active";
       } else if (email.validity.tooShort) {
         // If the value is too short,
         error.textContent = `Email should be at least ${email.minLength} characters; you entered ${email.value.length}.`;
+        error.className = "error active";
       }
+      else
       // Add the `active` class
-      error.className = "error active";
+      error.className = "error";
       break;
 
     case "country":
-      console.log(countryRegex.test(country.value));
       if (country.value.length !== 0 && !countryRegex.test(country.value)) {
         error.textContent = "Invalid country name";
       } else if (country.value.length === 0) {
+        error.textContent = "Please enter a country name";
+      } else error.textContent = "";
+      break;
+
+    case "postcode":
+      if (postcode.value.length !== 0 && !postcodeRegex.test(postcode.value)) {
+        error.textContent = "Invalid postcode";
+      } else if (postcode.value.length === 0) {
         error.textContent = "Please enter a country name";
       } else error.textContent = "";
       break;
