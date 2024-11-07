@@ -4,6 +4,8 @@ import "../css/style.css";
 
 const form = document.querySelector("form");
 const email = document.getElementById("email");
+const country = document.getElementById("country");
+const countryRegex = /^[A-Za-z\s]+$/;
 let error;
 let targetID;
 
@@ -21,6 +23,14 @@ form.addEventListener("input", (event) => {
         // If there is still an error, show the correct error
         showError(event, error);
         break;
+      }
+    case country:
+      if (countryRegex.test(country.value)) {
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      } else {
+        // If there is still an error, show the correct error
+        showError(event, error);
       }
   }
 });
@@ -45,6 +55,15 @@ function showError(event, error) {
       }
       // Add the `active` class
       error.className = "error active";
+      break;
+
+    case "country":
+      console.log(countryRegex.test(country.value));
+      if (country.value.length !== 0 && !countryRegex.test(country.value)) {
+        error.textContent = "Invalid country name";
+      } else if (country.value.length === 0) {
+        error.textContent = "Please enter a country name";
+      } else error.textContent = "";
       break;
   }
 }
