@@ -7,22 +7,24 @@
   font-family: "Roboto";
 }
 
-.menuButtonImage {
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
+.main-container{
+  display: flex;
+  width: max-content;
+  margin-left: 33vw;
+  margin-top: 25vh;
+  border: 5px solid aliceblue ;
 }
 
-.menuButtonSubtree {
-  margin-left: 6vh;
-  display: none;
-  position: absolute;
-  min-width: 160px;
-  overflow: auto;
-  z-index: 1;
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: max-content;
+  margin: 20px;
+  row-gap: 20px;
 }
 
-.visible {
-  display: block;
+button {
+  grid-column: span 2;
+  margin-bottom: 20px;
+  border-radius: 25px;
 }
