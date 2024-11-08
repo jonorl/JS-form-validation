@@ -15,8 +15,6 @@ const passwordRegex =
 let error;
 let targetID;
 
-console.log(passwordRegex.test("a"));
-
 // Event listeners
 
 form.addEventListener("input", (event) => {
@@ -120,7 +118,6 @@ function showError(event, error) {
         error.textContent =
           "Password must have 1 upper, 1 lowercase, 1 digit, and special char and min 8 chars";
         error.className = "error active";
-        console.log(error.textContent);
       } else if (password.value.length === 0) {
         error.textContent = "Please enter your password";
         error.className = "error active";
@@ -139,7 +136,6 @@ function showError(event, error) {
         error.textContent = "Passwords don't match";
         error.className = "error active";
       } else if (passwordConfirmation.value.length === 0) {
-        console.log("here");
         error.textContent = "Please enter your password";
         error.className = "error active";
       } else error.textContent = "";

@@ -49,6 +49,12 @@ input:invalid {
   background-color: #fdd;
 }
 
+input:valid {
+  border-color: white;
+  color: aliceblue;
+  background-color: black;
+}
+
 input:focus:invalid {
   outline: none;
 }
