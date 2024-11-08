@@ -18,62 +18,12 @@ let targetID;
 // Event listeners
 
 form.addEventListener("input", (event) => {
-  targetID = event.target.id;
-  error = document.querySelector(`#${targetID} + span.error`);
-  switch (event.target) {
-    case email:
-      if (email.validity.valid) {
-        error.textContent = ""; // Remove the message content
-        error.className = "error"; // Removes the `active` class
-      } else {
-        // If there is still an error, show the correct error
-        showError(event, error);
-        break;
-      }
-    case country:
-      if (countryRegex.test(country.value)) {
-        error.textContent = ""; // Remove the message content
-        error.className = "error"; // Removes the `active` class
-      } else {
-        // If there is still an error, show the correct error
-        showError(event, error);
-        break;
-      }
-    case postcode:
-      if (postcodeRegex.test(postcode.value)) {
-        error.textContent = ""; // Remove the message content
-        error.className = "error"; // Removes the `active` class
-      } else {
-        // If there is still an error, show the correct error
-        showError(event, error);
-        break;
-      }
-    case password:
-      if (passwordRegex.test(password.value)) {
-        error.textContent = ""; // Remove the message content
-        error.className = "error"; // Removes the `active` class
-      } else {
-        // If there is still an error, show the correct error
-        showError(event, error);
-        break;
-      }
-    case passwordConfirmation:
-      if (
-        passwordRegex.test(passwordConfirmation.value) &&
-        passwordConfirmation.value === password.value
-      ) {
-        error.textContent = ""; // Remove the message content
-        error.className = "error"; // Removes the `active` class
-      } else {
-        // If there is still an error, show the correct error
-        showError(event, error);
-        break;
-      }
-  }
+  validate(event);
 });
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  validate(event);
 });
 
 function showError(event, error) {
@@ -140,5 +90,75 @@ function showError(event, error) {
         error.className = "error active";
       } else error.textContent = "";
       break;
+  }
+}
+
+function validate(event) {
+
+  targetID = event.target.id;
+
+  // This IF statement is for when clicking on the submit button, to make it loop through every element to validate
+  if (targetID === "") {
+    error = document.querySelector(`#submit + span.error`);
+    const array = [email, country, postcode, password, passwordConfirmation]
+    array.forEach(element => {
+      event = {
+        target: element,
+      };
+      validate(event);
+    });
+  } else {
+    error = document.querySelector(`#${targetID} + span.error`);
+  };
+
+  switch (event.target) {
+    case email:
+      if (email.validity.valid) {
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      } else {
+        // If there is still an error, show the correct error
+        showError(event, error);
+        break;
+      }
+    case country:
+      if (countryRegex.test(country.value)) {
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      } else {
+        // If there is still an error, show the correct error
+        showError(event, error);
+        break;
+      }
+    case postcode:
+      if (postcodeRegex.test(postcode.value)) {
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      } else {
+        // If there is still an error, show the correct error
+        showError(event, error);
+        break;
+      }
+    case password:
+      if (passwordRegex.test(password.value)) {
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      } else {
+        // If there is still an error, show the correct error
+        showError(event, error);
+        break;
+      }
+    case passwordConfirmation:
+      if (
+        passwordRegex.test(passwordConfirmation.value) &&
+        passwordConfirmation.value === password.value
+      ) {
+        error.textContent = ""; // Remove the message content
+        error.className = "error"; // Removes the `active` class
+      } else {
+        // If there is still an error, show the correct error
+        showError(event, error);
+        break;
+      }
   }
 }
