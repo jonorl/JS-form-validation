@@ -26,6 +26,8 @@ form.addEventListener("submit", (event) => {
   validate(event);
 });
 
+// Auxiliary functions
+
 function showError(event, error) {
   let target = event.target;
   switch (target.id) {
