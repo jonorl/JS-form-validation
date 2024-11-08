@@ -94,14 +94,13 @@ function showError(event, error) {
 }
 
 function validate(event) {
-
   targetID = event.target.id;
 
   // This IF statement is for when clicking on the submit button, to make it loop through every element to validate
   if (targetID === "") {
     error = document.querySelector(`#submit + span.error`);
-    const array = [email, country, postcode, password, passwordConfirmation]
-    array.forEach(element => {
+    const array = [email, country, postcode, password, passwordConfirmation];
+    array.forEach((element) => {
       event = {
         target: element,
       };
@@ -109,7 +108,7 @@ function validate(event) {
     });
   } else {
     error = document.querySelector(`#${targetID} + span.error`);
-  };
+  }
 
   switch (event.target) {
     case email:
