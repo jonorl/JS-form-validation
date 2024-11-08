@@ -15,6 +15,8 @@ const passwordRegex =
 let error;
 let targetID;
 
+console.log(passwordRegex.test("a"));
+
 // Event listeners
 
 form.addEventListener("input", (event) => {
@@ -37,6 +39,7 @@ form.addEventListener("input", (event) => {
       } else {
         // If there is still an error, show the correct error
         showError(event, error);
+        break;
       }
     case postcode:
       if (postcodeRegex.test(postcode.value)) {
@@ -45,28 +48,28 @@ form.addEventListener("input", (event) => {
       } else {
         // If there is still an error, show the correct error
         showError(event, error);
+        break;
       }
     case password:
-      console.log(password.value)
-      console.log(passwordRegex.test(password.value))
       if (passwordRegex.test(password.value)) {
         error.textContent = ""; // Remove the message content
         error.className = "error"; // Removes the `active` class
       } else {
         // If there is still an error, show the correct error
         showError(event, error);
+        break;
       }
     case passwordConfirmation:
-      if (password.value !== passwordConfirmation.value){
-        error.textContent = ""; // Remove the message content
-        error.className = "error"; // Removes the `active` class
-      }
-      else if (passwordRegex.test(passwordConfirmation.value)) {
+      if (
+        passwordRegex.test(passwordConfirmation.value) &&
+        passwordConfirmation.value === password.value
+      ) {
         error.textContent = ""; // Remove the message content
         error.className = "error"; // Removes the `active` class
       } else {
         // If there is still an error, show the correct error
         showError(event, error);
+        break;
       }
   }
 });
@@ -114,20 +117,31 @@ function showError(event, error) {
 
     case "password":
       if (password.value.length !== 0 && !passwordRegex.test(password.value)) {
-        error.textContent = "Password must have 1 upper, 1 lowercase, 1 digit, and special char and min 8 chars";
+        error.textContent =
+          "Password must have 1 upper, 1 lowercase, 1 digit, and special char and min 8 chars";
+        error.className = "error active";
+        console.log(error.textContent);
       } else if (password.value.length === 0) {
         error.textContent = "Please enter your password";
+        error.className = "error active";
       } else error.textContent = "";
       break;
 
     case "passwordConfirmation":
-
-      if (passwordConfirmation.value !== password.value){
-      error.textContent = "passwords must match";
-      }  else if (passwordConfirmation.value.length !== 0 && !passwordRegex.test(passwordConfirmation.value)) {
-        error.textContent = "Password must have 1 upper, 1 lowercase, 1 digit, and special char and min 8 chars";
+      if (
+        passwordConfirmation.value.length !== 0 &&
+        !passwordRegex.test(passwordConfirmation.value)
+      ) {
+        error.textContent =
+          "Password must have 1 upper, 1 lowercase, 1 digit, and special char and min 8 chars";
+        error.className = "error active";
+      } else if (passwordConfirmation.value !== password.value) {
+        error.textContent = "Passwords don't match";
+        error.className = "error active";
       } else if (passwordConfirmation.value.length === 0) {
+        console.log("here");
         error.textContent = "Please enter your password";
+        error.className = "error active";
       } else error.textContent = "";
       break;
   }
